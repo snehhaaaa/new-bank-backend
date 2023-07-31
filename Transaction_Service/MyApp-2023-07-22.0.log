@@ -1,0 +1,60 @@
+2023-07-22 16:29:29.069  INFO 2876 --- [restartedMain] com.axis.TransactionServiceApplication   : Starting TransactionServiceApplication using Java 17.0.6 on DESKTOP-OF583NV with PID 2876 (E:\onlinebanking11\complete_backend-master\Transaction_Service\target\classes started by sumit in E:\onlinebanking11\complete_backend-master\Transaction_Service)
+2023-07-22 16:29:29.073  INFO 2876 --- [restartedMain] com.axis.TransactionServiceApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-07-22 16:29:29.133  INFO 2876 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-22 16:29:29.133  INFO 2876 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-22 16:29:30.044  INFO 2876 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-22 16:29:30.193  INFO 2876 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 139 ms. Found 3 JPA repository interfaces.
+2023-07-22 16:29:30.460  INFO 2876 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=43f2dff1-efb4-30dd-93ad-29ac858d7622
+2023-07-22 16:29:31.015  INFO 2876 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2023-07-22 16:29:31.027  INFO 2876 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-22 16:29:31.027  INFO 2876 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-22 16:29:31.134  INFO 2876 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-22 16:29:31.134  INFO 2876 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1999 ms
+2023-07-22 16:29:31.330  INFO 2876 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-22 16:29:31.377  INFO 2876 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-07-22 16:29:31.530  INFO 2876 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-22 16:29:31.626  INFO 2876 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-22 16:29:31.928  INFO 2876 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-22 16:29:31.944  INFO 2876 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-07-22 16:29:32.624  INFO 2876 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-22 16:29:32.635  INFO 2876 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-22 16:29:33.195  WARN 2876 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-22 16:29:33.497  INFO 2876 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@b324372, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7f66233a, org.springframework.security.web.context.SecurityContextPersistenceFilter@1723eef7, org.springframework.security.web.header.HeaderWriterFilter@5a20df47, org.springframework.web.filter.CorsFilter@4380b41e, org.springframework.security.web.authentication.logout.LogoutFilter@6513d193, com.axis.filter.JwtFilter@595dae28, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d2b3c8f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@c974a0f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7b2bff67, org.springframework.security.web.session.SessionManagementFilter@7b0abcb, org.springframework.security.web.access.ExceptionTranslationFilter@15f81cd8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@35e6e6e8]
+2023-07-22 16:29:33.753  WARN 2876 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2023-07-22 16:29:33.905  INFO 2876 --- [restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2023-07-22 16:29:34.089  WARN 2876 --- [restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2023-07-22 16:29:34.154  INFO 2876 --- [restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2023-07-22 16:29:34.194  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2023-07-22 16:29:34.201  INFO 2876 --- [restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 16:29:34.230  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2023-07-22 16:29:34.230  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2023-07-22 16:29:34.230  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2023-07-22 16:29:34.230  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2023-07-22 16:29:34.230  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2023-07-22 16:29:34.231  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2023-07-22 16:29:34.231  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2023-07-22 16:29:34.520  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2023-07-22 16:29:34.523  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2023-07-22 16:29:34.527  INFO 2876 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-07-22 16:29:34.533  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1690023574532 with initial instances count: 1
+2023-07-22 16:29:34.535  INFO 2876 --- [restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application TRANSACTION_SERVICE with eureka with status UP
+2023-07-22 16:29:34.536  INFO 2876 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1690023574535, current=UP, previous=STARTING]
+2023-07-22 16:29:34.537  INFO 2876 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TRANSACTION_SERVICE/DESKTOP-OF583NV:Transaction_Service:8082: registering service...
+2023-07-22 16:29:34.570  INFO 2876 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2023-07-22 16:29:34.571  INFO 2876 --- [restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8082
+2023-07-22 16:29:34.598  INFO 2876 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TRANSACTION_SERVICE/DESKTOP-OF583NV:Transaction_Service:8082 - registration status: 204
+2023-07-22 16:29:34.684  INFO 2876 --- [restartedMain] com.axis.TransactionServiceApplication   : Started TransactionServiceApplication in 6.224 seconds (JVM running for 7.132)
+2023-07-22 16:34:34.245  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 16:39:34.270  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 16:44:34.282  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 16:49:34.385  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 16:54:34.395  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 16:59:34.431  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:04:34.440  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:09:34.457  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:14:34.463  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:19:36.230  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:24:36.245  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:29:36.258  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:34:36.265  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-22 17:39:36.268  INFO 2876 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration

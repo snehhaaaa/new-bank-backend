@@ -1,0 +1,151 @@
+2023-07-26 14:42:03.010  INFO 9012 --- [restartedMain] com.axis.LockerServiceApplication        : Starting LockerServiceApplication using Java 17.0.6 on DESKTOP-OF583NV with PID 9012 (E:\onlinebanking11\complete_backend-master\Locker_Service\target\classes started by sumit in E:\onlinebanking11\complete_backend-master\Locker_Service)
+2023-07-26 14:42:03.022  INFO 9012 --- [restartedMain] com.axis.LockerServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-26 14:42:03.177  INFO 9012 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-26 14:42:03.178  INFO 9012 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-26 14:42:05.822  INFO 9012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-26 14:42:06.346  INFO 9012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 503 ms. Found 4 JPA repository interfaces.
+2023-07-26 14:42:07.192  INFO 9012 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=54dca77b-615f-372d-b775-cd8aa2878713
+2023-07-26 14:42:08.455  INFO 9012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8084 (http)
+2023-07-26 14:42:08.472  INFO 9012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-26 14:42:08.473  INFO 9012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-26 14:42:08.663  INFO 9012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-26 14:42:08.663  INFO 9012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5483 ms
+2023-07-26 14:42:09.428  INFO 9012 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-26 14:42:09.926  INFO 9012 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-07-26 14:42:11.189  INFO 9012 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-26 14:42:11.693  INFO 9012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-26 14:42:12.640  INFO 9012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-26 14:42:12.694  INFO 9012 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-07-26 14:42:14.934  INFO 9012 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-26 14:42:14.959  INFO 9012 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-26 14:42:16.522  WARN 9012 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-26 14:42:17.623  INFO 9012 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@580ede22, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@209601c8, org.springframework.security.web.context.SecurityContextPersistenceFilter@619db020, org.springframework.security.web.header.HeaderWriterFilter@c312a67, org.springframework.web.filter.CorsFilter@31aaa65d, org.springframework.security.web.authentication.logout.LogoutFilter@5a16d8b3, com.axis.filter.JwtFilter@7e6c4f61, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@30336f2d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@56a35883, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5c19a75c, org.springframework.security.web.session.SessionManagementFilter@1ed54627, org.springframework.security.web.access.ExceptionTranslationFilter@3b0dce11, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3d8f6c93]
+2023-07-26 14:42:18.462  WARN 9012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2023-07-26 14:42:18.855  INFO 9012 --- [restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2023-07-26 14:42:19.479  WARN 9012 --- [restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2023-07-26 14:42:19.710  INFO 9012 --- [restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2023-07-26 14:42:19.810  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2023-07-26 14:42:19.821  INFO 9012 --- [restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 14:42:19.875  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2023-07-26 14:42:19.876  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2023-07-26 14:42:19.876  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2023-07-26 14:42:19.876  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2023-07-26 14:42:19.877  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2023-07-26 14:42:19.877  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2023-07-26 14:42:19.878  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2023-07-26 14:42:20.781  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2023-07-26 14:42:20.784  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2023-07-26 14:42:20.789  INFO 9012 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-07-26 14:42:20.800  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1690362740797 with initial instances count: 0
+2023-07-26 14:42:20.804  INFO 9012 --- [restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application LOCKER_SERVICE with eureka with status UP
+2023-07-26 14:42:20.805  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1690362740805, current=UP, previous=STARTING]
+2023-07-26 14:42:20.808  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084: registering service...
+2023-07-26 14:42:20.857  INFO 9012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8084 (http) with context path ''
+2023-07-26 14:42:20.858  INFO 9012 --- [restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8084
+2023-07-26 14:42:20.902  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084 - registration status: 204
+2023-07-26 14:42:21.230  INFO 9012 --- [restartedMain] com.axis.LockerServiceApplication        : Started LockerServiceApplication in 19.833 seconds (JVM running for 22.706)
+2023-07-26 14:42:50.786  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2023-07-26 14:42:50.786  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2023-07-26 14:42:50.787  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2023-07-26 14:42:50.787  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2023-07-26 14:42:50.787  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2023-07-26 14:42:50.787  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application version is -1: false
+2023-07-26 14:42:50.787  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2023-07-26 14:42:50.818  INFO 9012 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2023-07-26 14:47:19.893  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 14:52:19.917  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 14:57:19.928  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 15:02:19.932  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 15:06:33.095  INFO 9012 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2023-07-26 15:06:33.186  INFO 9012 --- [Thread-1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application LOCKER_SERVICE with eureka with status DOWN
+2023-07-26 15:06:33.188  INFO 9012 --- [Thread-1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1690364193188, current=DOWN, previous=UP]
+2023-07-26 15:06:33.189  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084: registering service...
+2023-07-26 15:06:33.225  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084 - registration status: 204
+2023-07-26 15:06:33.344  INFO 9012 --- [Thread-1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-26 15:06:33.427  WARN 9012 --- [Thread-1] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.6/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.6/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.6/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.6/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@17.0.6/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.6/java.lang.Thread.run(Thread.java:833)
+2023-07-26 15:06:33.487  INFO 9012 --- [Thread-1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-26 15:06:33.551  INFO 9012 --- [Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-26 15:06:33.640  INFO 9012 --- [Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-26 15:06:33.641  INFO 9012 --- [Thread-1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2023-07-26 15:06:36.658  INFO 9012 --- [Thread-1] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2023-07-26 15:06:36.667  INFO 9012 --- [Thread-1] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084 - deregister  status: 200
+2023-07-26 15:06:36.681  INFO 9012 --- [Thread-1] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2023-07-26 15:06:37.216  INFO 9012 --- [restartedMain] com.axis.LockerServiceApplication        : Starting LockerServiceApplication using Java 17.0.6 on DESKTOP-OF583NV with PID 9012 (E:\onlinebanking11\complete_backend-master\Locker_Service\target\classes started by sumit in E:\onlinebanking11\complete_backend-master\Locker_Service)
+2023-07-26 15:06:37.216  INFO 9012 --- [restartedMain] com.axis.LockerServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-26 15:06:37.720  INFO 9012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-26 15:06:37.754  INFO 9012 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 4 JPA repository interfaces.
+2023-07-26 15:06:37.892  INFO 9012 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=54dca77b-615f-372d-b775-cd8aa2878713
+2023-07-26 15:06:38.013  INFO 9012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8084 (http)
+2023-07-26 15:06:38.014  INFO 9012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-26 15:06:38.015  INFO 9012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-26 15:06:38.063  INFO 9012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-26 15:06:38.064  INFO 9012 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 844 ms
+2023-07-26 15:06:38.127  INFO 9012 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-26 15:06:38.136  INFO 9012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-07-26 15:06:38.161  INFO 9012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-07-26 15:06:38.162  INFO 9012 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-07-26 15:06:38.286  INFO 9012 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-26 15:06:38.287  INFO 9012 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-26 15:06:38.541  WARN 9012 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-26 15:06:38.659  INFO 9012 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@282bd3e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6410bd67, org.springframework.security.web.context.SecurityContextPersistenceFilter@b5374ff, org.springframework.security.web.header.HeaderWriterFilter@3d0faca6, org.springframework.web.filter.CorsFilter@27beab5a, org.springframework.security.web.authentication.logout.LogoutFilter@2624ae7e, com.axis.filter.JwtFilter@15e4c619, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@63c069fb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23ea83b9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@449ffcd0, org.springframework.security.web.session.SessionManagementFilter@275a5d52, org.springframework.security.web.access.ExceptionTranslationFilter@51073f99, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2c49e17c]
+2023-07-26 15:06:38.773  WARN 9012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2023-07-26 15:06:38.959  INFO 9012 --- [restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2023-07-26 15:06:39.141  WARN 9012 --- [restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2023-07-26 15:06:39.168  INFO 9012 --- [restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2023-07-26 15:06:39.171  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2023-07-26 15:06:39.172  INFO 9012 --- [restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 15:06:39.181  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2023-07-26 15:06:39.181  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2023-07-26 15:06:39.181  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2023-07-26 15:06:39.181  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2023-07-26 15:06:39.181  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2023-07-26 15:06:39.181  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2023-07-26 15:06:39.181  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2023-07-26 15:06:39.207  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2023-07-26 15:06:39.208  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2023-07-26 15:06:39.209  INFO 9012 --- [restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-07-26 15:06:39.210  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1690364199210 with initial instances count: 6
+2023-07-26 15:06:39.213  INFO 9012 --- [restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application LOCKER_SERVICE with eureka with status UP
+2023-07-26 15:06:39.214  INFO 9012 --- [restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1690364199214, current=UP, previous=STARTING]
+2023-07-26 15:06:39.215  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084: registering service...
+2023-07-26 15:06:39.219  INFO 9012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8084 (http) with context path ''
+2023-07-26 15:06:39.220  INFO 9012 --- [restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8084
+2023-07-26 15:06:39.233  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084 - registration status: 204
+2023-07-26 15:06:39.388  INFO 9012 --- [restartedMain] com.axis.LockerServiceApplication        : Started LockerServiceApplication in 2.368 seconds (JVM running for 1480.864)
+2023-07-26 15:06:39.391  INFO 9012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-26 15:11:39.214  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 15:16:39.249  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 15:21:39.335  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 15:26:39.355  INFO 9012 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-07-26 15:26:40.959  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-07-26 15:26:41.021  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application LOCKER_SERVICE with eureka with status DOWN
+2023-07-26 15:26:41.022  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1690365401022, current=DOWN, previous=UP]
+2023-07-26 15:26:41.028  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084: registering service...
+2023-07-26 15:26:41.104  INFO 9012 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084 - registration status: 204
+2023-07-26 15:26:41.181  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-26 15:26:41.267  WARN 9012 --- [RMI TCP Connection(63)-127.0.0.1] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [HikariPool-2 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.6/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.6/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.6/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.6/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@17.0.6/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.6/java.lang.Thread.run(Thread.java:833)
+2023-07-26 15:26:41.302  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-26 15:26:41.334  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-07-26 15:26:41.403  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-07-26 15:26:41.404  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2023-07-26 15:26:44.419  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2023-07-26 15:26:44.429  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_LOCKER_SERVICE/host.docker.internal:Locker_service:8084 - deregister  status: 200
+2023-07-26 15:26:44.449  INFO 9012 --- [RMI TCP Connection(63)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
