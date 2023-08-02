@@ -28,7 +28,6 @@ public class UserDetailsServiceImplTest {
     @Mock
     private AccountRepository accountRepository;
 
-    // Other setup and initialization code as needed
 
     @Test
     public void testLoadUserByUsername() {
@@ -40,14 +39,12 @@ public class UserDetailsServiceImplTest {
 
         Assert.assertNotNull(userDetails);
         Assert.assertEquals("testuser", userDetails.getUsername());
-        // Add more assertions as needed
     }
 
     @Test
     public void testCreateCustomer() {
         Users user = new Users();
         user.setId(1);
-        // Set other properties
 
         Mockito.when(userRepository.save(Mockito.any(Users.class))).thenReturn(user);
 
@@ -55,10 +52,8 @@ public class UserDetailsServiceImplTest {
 
         Assert.assertNotNull(createdUser);
         Assert.assertEquals(1, createdUser.getId());
-        // Add more assertions as needed
     }
 
-    // Write similar tests for other methods like createEmployee, deleteEmployee, viewProfile, etc.
 
     @Test
     public void testGenerateAccountNumber() {
@@ -67,18 +62,17 @@ public class UserDetailsServiceImplTest {
         Assert.assertEquals(15, accountNumber.length());
     }
 
-    // Write similar tests for other utility methods
 
     @Test
     public void testEditUser() {
         Users existingUser = new Users();
         existingUser.setId(1);
-        // Set other properties
+
 
         Users updatedUser = new Users();
         updatedUser.setId(1);
         updatedUser.setUsername("newusername");
-        // Set other properties
+
 
         Mockito.when(userRepository.findById(1)).thenReturn(existingUser);
         Mockito.when(userRepository.save(Mockito.any(Users.class))).thenReturn(updatedUser);
@@ -87,10 +81,7 @@ public class UserDetailsServiceImplTest {
 
         Assert.assertNotNull(editedUser);
         Assert.assertEquals("newusername", editedUser.getUsername());
-        // Add more assertions as needed
+
     }
 
-    // Write similar tests for other edit methods
-
-    // Add more test cases for the remaining methods
 }

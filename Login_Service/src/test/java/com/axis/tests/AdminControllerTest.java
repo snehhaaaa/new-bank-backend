@@ -28,7 +28,6 @@ public class AdminControllerTest {
     @Mock
     private UserDetailsServiceImpl userService;
 
-    // Other setup and initialization code as needed
 
     @Test
     public void testAuthenticate_Successful() throws Exception {
@@ -54,7 +53,6 @@ public class AdminControllerTest {
     public void testCreateEmployee() {
         Users employee = new Users();
         employee.setUsername("newemployee");
-        // Set other properties
 
         Mockito.when(userService.createEmployee(Mockito.any(Users.class))).thenReturn(employee);
 

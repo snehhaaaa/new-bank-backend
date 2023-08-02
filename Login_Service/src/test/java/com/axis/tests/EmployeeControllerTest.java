@@ -47,7 +47,7 @@ public class EmployeeControllerTest {
 
         Assert.assertNotNull(responseEntity);
         Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        // Add more assertions as needed
+
     }
 
     @Test(expected = Exception.class)

@@ -34,7 +34,7 @@ public class CustomerControllerTest {
     @Mock
     private JavaMailSender javaMailSender;
 
-    // Other setup and initialization code as needed
+
 
     @Test
     public void testAuthenticate_Successful() throws Exception {
@@ -49,7 +49,7 @@ public class CustomerControllerTest {
 
         Assert.assertNotNull(responseEntity);
         Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        // Add more assertions as needed
+
     }
 
     @Test(expected = Exception.class)
