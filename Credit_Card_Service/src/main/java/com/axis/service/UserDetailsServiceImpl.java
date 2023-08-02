@@ -132,7 +132,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	public static String generateCVV() {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 13; i++) 
+        for (int i = 0; i < 3; i++)
             sb.append(random.nextInt(10));
         return sb.toString();
     }
