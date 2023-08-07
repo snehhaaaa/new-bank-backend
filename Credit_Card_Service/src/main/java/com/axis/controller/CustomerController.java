@@ -197,7 +197,7 @@ public class CustomerController {
 
             if (paymentSuccess) {
                 logger.info("Credit card payment successful for user: {}", email);
-                return "Payment of $" + amount + " made successfully.";
+                return "Payment of ₹" + amount + " made successfully.";
             } else {
                 logger.info("Credit card payment failed for user: {}", email);
                 return "Payment failed. Please check your credit card details and try again.";

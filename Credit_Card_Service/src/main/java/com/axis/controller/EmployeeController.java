@@ -27,100 +27,94 @@ import com.axis.entity.Users;
 import com.axis.service.UserDetailsServiceImpl;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000",allowCredentials="true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RequestMapping("/employee/creditcard")
 public class EmployeeController {
 
 	@Autowired
 	private UserDetailsServiceImpl service;
-	
+
 	@PutMapping("/activate-credit-card")
 	public String activateCreditCard(@RequestBody Map<String, Object> requestData) {
-	    int creditcardid = Integer.valueOf(requestData.get("creditcardid").toString());
-	    service.activateCreditCard(creditcardid);
-	    
- CreditCard creditcard = service.findCreditCardById(creditcardid);
-	    
-	    Users user = service.findUserById(creditcard.account.getUserid());
-   // Check if the user exists
-	    if (user == null) {
-	        return "Locker activation failed. User not found.";
-	    }
-	    // Sending email
-	    // Configure the email properties
-	    String senderEmail = "axisbank.confirmationmail@gmail.com";
-	    String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual password
-	    String recipientEmail = user.getEmail(); // Replace with the recipient's email address
-	    String subject = "Credit Card Activation Confirmation";
-	    String messageBody = "Dear User,\n\n"
-	                        + "Your credit card with ID " + creditcardid + " has been successfully activated.\n\n"
-	                        + "Thank you for choosing Axis Bank.\n\n"
-	                        + "Best regards,\n"
-	                        + "Axis Bank";
+		int creditcardid = Integer.valueOf(requestData.get("creditcardid").toString());
+		service.activateCreditCard(creditcardid);
 
-	    Properties properties = System.getProperties();
-	    properties.put("mail.smtp.auth", "true");
-	    properties.put("mail.smtp.ssl.enable", "true");
-	    properties.put("mail.smtp.host", "smtp.gmail.com");
-	    properties.put("mail.smtp.port", "465");
+		CreditCard creditcard = service.findCreditCardById(creditcardid);
 
-	    Session session = Session.getInstance(properties, new Authenticator() {
-	        protected PasswordAuthentication getPasswordAuthentication() {
-	            return new PasswordAuthentication(senderEmail, senderPassword);
-	        }
-	    });
+		Users user = service.findUserById(creditcard.account.getUserid());
+		// Check if the user exists
+		if (user == null) {
+			return "User not found. Please into the database or contact your administartor";
+		}
+		// Sending email
+		// Configure the email properties
+		String senderEmail = "axisbank.confirmationmail@gmail.com";
+		String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual password
+		String recipientEmail = user.getEmail(); // Replace with the recipient's email address
+		String subject = "Credit Card Activation Confirmation";
+		String messageBody = "Dear User,\n\n" + "Your credit card with ID " + creditcardid
+				+ " has been successfully activated.\n\n" + "Thank you for choosing Axis Bank.\n\n" + "Best regards,\n"
+				+ "Axis Bank";
 
-	    session.setDebug(true);
+		Properties properties = System.getProperties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "465");
 
-	    try {
-	        // Create a MimeMessage and set the necessary attributes
-	        MimeMessage message = new MimeMessage(session);
-	        message.setFrom(new InternetAddress(senderEmail));
-	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-	        message.setSubject(subject);
-	        message.setText(messageBody);
+		Session session = Session.getInstance(properties, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderEmail, senderPassword);
+			}
+		});
 
-	        // Send the message using Transport
-	        Transport.send(message);
-	        return "Credit card with ID " + creditcardid + " is successfully activated now. Confirmation email has been sent.";
-	    } catch (MessagingException e) {
-	        return "Credit card with ID " + creditcardid + " is successfully activated now, but there was an error sending the confirmation email.";
-	    }
+		session.setDebug(true);
+
+		try {
+			// Create a MimeMessage and set the necessary attributes
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(senderEmail));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+			message.setSubject(subject);
+			message.setText(messageBody);
+
+			// Send the message using Transport
+			Transport.send(message);
+			return "Credit card with ID " + creditcardid
+					+ " is successfully activated now. Confirmation email has been sent.";
+		} catch (MessagingException e) {
+			return "Credit card with ID " + creditcardid
+					+ " is successfully activated now, but there was an error sending the confirmation email.";
+		}
 	}
 
-	
 	@PutMapping("/foreclose-credit-card")
 	public String foreCloseCreditCard(@RequestBody Map<String, Object> requestData) {
-	    int creditcardid = Integer.valueOf(requestData.get("creditcardid").toString());
-	    service.foreCloseCreditCard(creditcardid);
-	    
-	    CreditCard creditcard = service.findCreditCardById(creditcardid);
-	    
-	    Users user = service.findUserById(creditcard.account.getUserid());
-   // Check if the user exists
-	    if (user == null) {
-	        return "Locker activation failed. User not found.";
-	    
-	    }
-	    // Sending email
-	    // Configure the email properties
-	    String senderEmail = "axisbank.confirmationmail@gmail.com";
-	    String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual password
-	    String recipientEmail = user.getEmail(); // Replace with the recipient's email address
-	    String subject = "Credit Card Closure Confirmation";
-	    String messageBody = "Dear User,\n\n"
-	                        + "Your credit card with ID " + creditcardid + " has been successfully closed.\n\n"
-	                        + "Thank you for choosing Axis Bank.\n\n"
-	                        + "Best regards,\n"
-	                        + "Axis Bank";
+		int creditcardid = Integer.valueOf(requestData.get("creditcardid").toString());
+		service.foreCloseCreditCard(creditcardid);
 
-	    Properties properties = System.getProperties();
-	    properties.put("mail.smtp.auth", "true");
-	    properties.put("mail.smtp.ssl.enable", "true");
-	    properties.put("mail.smtp.host", "smtp.gmail.com");
-	    properties.put("mail.smtp.port", "465");
+		CreditCard creditcard = service.findCreditCardById(creditcardid);
 
-	    Session session = Session.getInstance(properties, new Authenticator() {
+		Users user = service.findUserById(creditcard.account.getUserid());
+		// Check if the user exists
+		if (user == null) {
+			return "User does not exist. Please look into the database or contact your administartor .";
+		}
+
+	// Sending email
+	// Configure the email properties
+	String senderEmail = "axisbank.confirmationmail@gmail.com";
+	String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual password
+	String recipientEmail = user.getEmail(); // Replace with the recipient's email address
+	String subject = "Credit Card Closure Confirmation";
+	String messageBody = "Dear User,\n\n" + "Your credit card with ID " + creditcardid
+			+ " has been successfully closed.\n\n" + "Thank you for choosing Axis Bank.\n\n" + "Best regards,\n"
+			+ "Axis Bank";
+
+	Properties properties = System
+			.getProperties();properties.put("mail.smtp.auth","true");properties.put("mail.smtp.ssl.enable","true");properties.put("mail.smtp.host","smtp.gmail.com");properties.put("mail.smtp.port","465");
+
+	Session session = Session.getInstance(properties, new Authenticator() {
 	        protected PasswordAuthentication getPasswordAuthentication() {
 	            return new PasswordAuthentication(senderEmail, senderPassword);
 	        }
@@ -130,34 +124,31 @@ public class EmployeeController {
 
 	    try {
 	        // Create a MimeMessage and set the necessary attributes
-	        MimeMessage message = new MimeMessage(session);
-	        message.setFrom(new InternetAddress(senderEmail));
-	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-	        message.setSubject(subject);
-	        message.setText(messageBody);
+	MimeMessage message = new MimeMessage(
+			session);message.setFrom(new InternetAddress(senderEmail));message.addRecipient(Message.RecipientType.TO,new InternetAddress(recipientEmail));message.setSubject(subject);message.setText(messageBody);
 
-	        // Send the message using Transport
-	        Transport.send(message);
-	        return "Credit card with ID " + creditcardid + " is successfully closed now. Confirmation email has been sent.";
-	    } catch (MessagingException e) {
-	        return "Credit card with ID " + creditcardid + " is successfully closed now, but there was an error sending the confirmation email.";
-	    }
+	// Send the message using Transport
+	Transport.send(message);return"Credit card with ID "+creditcardid+" is successfully closed now. Confirmation email has been sent.";}catch(
+	MessagingException e)
+	{
+		return "Credit card with ID " + creditcardid
+				+ " is successfully closed now, but there was an error sending the confirmation email.";
+	}
 	}
 
-	
 	@GetMapping("/credit-card-pending-requests")
 	public List<CreditCard> pendingCreditCardRequests() {
 		return service.pendingCreditCardRequests();
 	}
-	
+
 	@GetMapping("/credit-card-closing-requests")
 	public List<CreditCard> closingCreditCardRequests() {
 		return service.closingCreditCardRequests();
 	}
-	
+
 	@GetMapping("/all-credit-cards")
 	public List<CreditCard> allCreditCards() {
 		return service.allCreditCards();
 	}
-	
+
 }

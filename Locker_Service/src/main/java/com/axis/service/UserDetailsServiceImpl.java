@@ -111,30 +111,30 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     }
 	
 	public double calculateLockerPrice(String lockertype,String lockersize) {
-		double lockertypeamount = 0,lockersizeamount = 0;
-		
-		if(lockertype.equals("Temporary Locker"))
+		double lockertypeamount = 0, lockersizeamount = 0;
+
+		if(lockertype.equalsIgnoreCase("Temporary"))
 			lockertypeamount = 30;
-		if(lockertype.equals("Personal Locker"))
+		if(lockertype.equals("Personal"))
 			lockertypeamount = 40;
-		if(lockertype.equals("Self Deposit Locker"))
+		if(lockertype.equalsIgnoreCase("Self_Deposit"))
 			lockertypeamount = 40;
-		if(lockertype.equals("Business Locker"))
+		if(lockertype.equalsIgnoreCase("Business"))
 			lockertypeamount = 50;
-		if(lockertype.equals("Shared Locker"))
+		if(lockertype.equalsIgnoreCase("Shared"))
 			lockertypeamount = 50;
-		if(lockertype.equals("Digital Locker"))
+		if(lockertype.equalsIgnoreCase("Digital"))
 			lockertypeamount = 50;
-		if(lockertype.equals("Keyless Locker"))
+		if(lockertype.equalsIgnoreCase("Keyless"))
 			lockertypeamount = 50;
 		
-		if(lockersize.equals("Small"))
+		if(lockersize.equalsIgnoreCase("Small"))
 			lockersizeamount = 10;
-		if(lockersize.equals("Medium"))
+		if(lockersize.equalsIgnoreCase("Medium"))
 			lockersizeamount = 20;
-		if(lockersize.equals("Large"))
+		if(lockersize.equalsIgnoreCase("Large"))
 			lockersizeamount = 30;
-		if(lockersize.equals("Extra Large"))
+		if(lockersize.equalsIgnoreCase("EXTRA_LARGE"))
 			lockersizeamount = 40;
 		
 		return lockertypeamount * lockersizeamount;

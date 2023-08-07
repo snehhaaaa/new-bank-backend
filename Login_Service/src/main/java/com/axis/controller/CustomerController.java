@@ -40,320 +40,319 @@ import com.axis.service.UserDetailsServiceImpl;
 import com.axis.util.JwtUtil;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000",allowCredentials="true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RequestMapping("/customer")
-//@CrossOrigin(origins = "http://localhost:3000")
-
 public class CustomerController {
+	private static final Logger LOGGER = Logger.getLogger(CustomerController.class.getName());
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerController.class.getName());
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    
-    @Autowired
-    private JwtUtil jwtUtil;
-    
-    @Autowired
-    private UserDetailsServiceImpl service;
-    
-    @Autowired
-    private JavaMailSender javaMailSender;
-    
-    // Map to store the OTP and its expiration time (in milliseconds) for each vendor
-    private static final Map<String, String> otpMap = new ConcurrentHashMap<>();
-    private static final int OTP_EXPIRATION_DURATION = 5 * 60 * 1000; // 5 minutes
-    
-    @GetMapping("/home")
-    public String home(HttpServletRequest request) {
-        String username = request.getAttribute("username").toString();
-        LOGGER.info("Home accessed by user: " + username);
-        return "Hello "+username+"(user) welcome home.\nYou're logged in.";
-    }
-    
-    @PostMapping("/authenticate")
-    public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) throws Exception {
-        String username = authRequest.getUsername();
-        LOGGER.info("Authentication request for user: " + username);
+	@Autowired
+	private JwtUtil jwtUtil;
 
-        Users vendor = service.getUserByUsername(username);
+	@Autowired
+	private UserDetailsServiceImpl service;
 
-        if (vendor != null) {
-            if (vendor.isBlocked()) {
-                LOGGER.warning("Authentication failed. Account blocked for user: " + username);
-                throw new Exception("Your account is blocked. Please check your email for the unblock link.");
-            }
+	@Autowired
+	private JavaMailSender javaMailSender;
 
-            try {
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, authRequest.getPassword()));
-                // Reset login attempts on successful login
-                vendor.setLoginAttempts(0);
-                service.updateCustomer(vendor);
-            } catch (Exception ex) {
-                // Increase login attempts and block the account after three unsuccessful attempts
-                vendor.setLoginAttempts(vendor.getLoginAttempts() + 1);
-                if (vendor.getLoginAttempts() >= 3) {
-                    vendor.setBlocked(true);
-                    // Send email with unblock link
-                    sendEmailWithUnblockLink(vendor);
-                }
-                service.updateCustomer(vendor);
+	// Map to store the OTP and its expiration time (in milliseconds) for each
+	// vendor
+	private static final Map<String, String> otpMap = new ConcurrentHashMap<>();
+	private static final int OTP_EXPIRATION_DURATION = 5 * 60 * 1000; // 5 minutes
 
-                LOGGER.warning("Authentication failed for user: " + username + ". Attempts: " + vendor.getLoginAttempts());
-                throw new Exception("Invalid username/password. Attempts: " + vendor.getLoginAttempts());
-            }
+	@GetMapping("/home")
+	public String home(HttpServletRequest request) {
+		String username = request.getAttribute("username").toString();
+		LOGGER.info("Home accessed by user: " + username);
+		return "Hello " + username + "!";
+	}
 
-            LOGGER.info("User logged in successfully: " + username);
-            return ResponseEntity.ok(jwtUtil.generateToken(username));
-        } else {
-            LOGGER.warning("Customer with username " + username + " not found.");
-            throw new Exception("Cusotmer with username " + username + " not found.");
-        }
-    }
+	@PostMapping("/authenticate")
+	public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) throws Exception {
+		String username = authRequest.getUsername();
+		LOGGER.info("Authentication request for user: " + username);
 
-    @GetMapping("/unblock")
-    public ResponseEntity<?> unblockAccount(@RequestParam String username) {
-        LOGGER.info("Unblock request received for user: " + username);
+		Users vendor = service.getUserByUsername(username);
 
-        Users vendor = service.getUserByUsername(username);
+		if (vendor != null) {
+			if (vendor.isBlocked()) {
+				LOGGER.warning("Authentication failed. Account blocked for user: " + username);
+				throw new Exception("Your account is blocked. Please check your email for the unblock link.");
+			}
 
-        if (vendor != null && vendor.isBlocked()) {
-            vendor.setBlocked(false);
-            vendor.setLoginAttempts(0);
-            service.updateCustomer(vendor);
+			try {
+				authenticationManager
+						.authenticate(new UsernamePasswordAuthenticationToken(username, authRequest.getPassword()));
+				// Reset login attempts on successful login
+				vendor.setLoginAttempts(0);
+				service.updateCustomer(vendor);
+			} catch (Exception ex) {
+				// Increase login attempts and block the account after three unsuccessful
+				// attempts
+				vendor.setLoginAttempts(vendor.getLoginAttempts() + 1);
+				if (vendor.getLoginAttempts() >= 3) {
+					vendor.setBlocked(true);
+					// Send email with unblock link
+					sendEmailWithUnblockLink(vendor);
+				}
+				service.updateCustomer(vendor);
 
-            LOGGER.info("User account unblocked: " + username);
-            return ResponseEntity.ok("Your account has been unblocked successfully.");
-        } else {
-            LOGGER.warning("Invalid request to unblock the account: " + username);
-            return ResponseEntity.badRequest().body("Invalid request to unblock the account.");
-        }
-    }
+				LOGGER.warning(
+						"Authentication failed for user: " + username + ". Attempts: " + vendor.getLoginAttempts());
+				throw new Exception("Invalid username/password. Attempts: " + vendor.getLoginAttempts());
+			}
 
-    private void sendEmailWithUnblockLink(Users vendor) {
-        // Email content
-        String subject = "Account Blocked - Unblock Link";
-        String message = "Hello " + vendor.getUsername() + ",\n\nYour account has been blocked due to three consecutive unsuccessful login attempts.\n"
-                + "To unblock your account, click on the following link:\n"
-                + "http://localhost:8081/customer/unblock?username=" + vendor.getUsername() + "\n\n"
-                + "If you did not attempt these logins, please contact our support team.\n\n"
-                + "Best regards,\nYour Vendor Team";
+			LOGGER.info("User logged in successfully: " + username);
+			return ResponseEntity.ok(jwtUtil.generateToken(username));
+		} else {
+			LOGGER.warning("Customer with username " + username + " not found.");
+			throw new Exception("Cusotmer with username " + username + " not found.");
+		}
+	}
 
-        // Send the email
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(vendor.getEmail());
-        email.setSubject(subject);
-        email.setText(message);
-        javaMailSender.send(email);
+	@GetMapping("/unblock")
+	public ResponseEntity<?> unblockAccount(@RequestParam String username) {
+		LOGGER.info("Unblock request received for user: " + username);
 
-        LOGGER.info("Account blocked email sent to: " + vendor.getEmail());
-    }
+		Users vendor = service.getUserByUsername(username);
 
-    @PostMapping("/forgot-password")
-    public ResponseEntity<String> sendForgotPasswordOTP(@RequestBody ForgotPasswordRequest forgotPasswordRequest) {
-        String username = forgotPasswordRequest.getUsername();
-        LOGGER.info("Forgot password request received for user: " + username);
+		if (vendor != null && vendor.isBlocked()) {
+			vendor.setBlocked(false);
+			vendor.setLoginAttempts(0);
+			service.updateCustomer(vendor);
 
-        Users vendor = service.findUserByEmail(username);
+			LOGGER.info("User account unblocked: " + username);
+			return ResponseEntity.ok("Your account has been unblocked successfully.");
+		} else {
+			LOGGER.warning("Invalid request to unblock the account: " + username);
+			return ResponseEntity.badRequest().body("Invalid request to unblock the account.");
+		}
+	}
 
-        if (vendor == null) {
-            LOGGER.warning("Customer not found for forgot password request: " + username);
-            return ResponseEntity.notFound().build();
-        }
+	private void sendEmailWithUnblockLink(Users vendor) {
+		// Email content
+		String subject = "Account Blocked - Unblock Link";
+		String message = "Hello " + vendor.getUsername()
+				+ ",\n\nYour account has been blocked due to three consecutive unsuccessful login attempts.\n"
+				+ "To unblock your account, click on the following link:\n"
+				+ "http://localhost:8081/customer/unblock?username=" + vendor.getUsername() + "\n\n"
+				+ "If you did not attempt these logins, please contact our support team.\n\n"
+				+ "Best regards,\nYour Vendor Team";
 
-        // Generate a random 6-digit OTP
-        String otp = generateOTP();
+		// Send the email
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setTo(vendor.getEmail());
+		email.setSubject(subject);
+		email.setText(message);
+		javaMailSender.send(email);
 
-        // Store the OTP and its expiration time
-        long expirationTime = System.currentTimeMillis() + OTP_EXPIRATION_DURATION;
-        otpMap.put(username, otp + ":" + expirationTime);
+		LOGGER.info("Account blocked email sent to: " + vendor.getEmail());
+	}
 
-        // Send the OTP to the user's email
-        String recipientEmail = vendor.getEmail();
-        String subject = "Password Reset OTP";
-        String messageBody = "Your OTP to reset the password is: " + otp;
+	@PostMapping("/forgot-password")
+	public ResponseEntity<String> sendForgotPasswordOTP(@RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+		String username = forgotPasswordRequest.getUsername();
+		LOGGER.info("Forgot password request received for user: " + username);
 
-        sendEmail(recipientEmail, subject, messageBody);
+		Users vendor = service.findUserByEmail(username);
 
-        LOGGER.info("Forgot password OTP sent to: " + recipientEmail);
-        return ResponseEntity.ok("OTP sent successfully.");
-    }
+		if (vendor == null) {
+			LOGGER.warning("Customer not found for forgot password request: " + username);
+			return ResponseEntity.notFound().build();
+		}
 
-    @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
-        String username = resetPasswordRequest.getUsername();
-        String otp = resetPasswordRequest.getOtp();
-        String newPassword = resetPasswordRequest.getNewPassword();
+		// Generate a random 6-digit OTP
+		String otp = generateOTP();
 
-        // Retrieve the stored OTP and its expiration time
-        String storedOtpAndExpiration = otpMap.get(username);
-        if (storedOtpAndExpiration == null) {
-            LOGGER.warning("OTP not found for reset password request: " + username);
-            return ResponseEntity.badRequest().body("OTP not found. Please request an OTP again.");
-        }
+		// Store the OTP and its expiration time
+		long expirationTime = System.currentTimeMillis() + OTP_EXPIRATION_DURATION;
+		otpMap.put(username, otp + ":" + expirationTime);
 
-        String[] otpAndExpiration = storedOtpAndExpiration.split(":");
-        String storedOtp = otpAndExpiration[0];
-        long expirationTime = Long.parseLong(otpAndExpiration[1]);
+		// Send the OTP to the user's email
+		String recipientEmail = vendor.getEmail();
+		String subject = "Password Reset OTP";
+		String messageBody = "Your OTP to reset the password is: " + otp;
 
-        // Check if the OTP is expired
-        if (System.currentTimeMillis() > expirationTime) {
-            otpMap.remove(username);
-            LOGGER.warning("OTP expired for reset password request: " + username);
-            return ResponseEntity.badRequest().body("OTP has expired. Please request an OTP again.");
-        }
+		sendEmail(recipientEmail, subject, messageBody);
 
-        // Check if the provided OTP matches the stored OTP
-        if (!otp.equals(storedOtp)) {
-            LOGGER.warning("Invalid OTP for reset password request: " + username);
-            return ResponseEntity.badRequest().body("Invalid OTP.");
-        }
+		LOGGER.info("Forgot password OTP sent to: " + recipientEmail);
+		return ResponseEntity.ok("OTP sent successfully.");
+	}
 
-        // Reset the password for the user
-        Users vendor = service.findUserByEmail(username);
-        vendor.setPassword(newPassword);
-        service.editVendor(vendor);
+	@PostMapping("/reset-password")
+	public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+		String username = resetPasswordRequest.getUsername();
+		String otp = resetPasswordRequest.getOtp();
+		String newPassword = resetPasswordRequest.getNewPassword();
 
-        // Password reset successful, remove the OTP entry from the map
-        otpMap.remove(username);
+		// Retrieve the stored OTP and its expiration time
+		String storedOtpAndExpiration = otpMap.get(username);
+		if (storedOtpAndExpiration == null) {
+			LOGGER.warning("OTP not found for reset password request: " + username);
+			return ResponseEntity.badRequest().body("OTP not found. Please request an OTP again.");
+		}
 
-        // Notify the user that the password has been reset
-        String recipientEmail = vendor.getEmail();
-        String subject = "Password Reset Successful";
-        String messageBody = "Your password has been successfully reset.";
+		String[] otpAndExpiration = storedOtpAndExpiration.split(":");
+		String storedOtp = otpAndExpiration[0];
+		long expirationTime = Long.parseLong(otpAndExpiration[1]);
 
-        sendEmail(recipientEmail, subject, messageBody);
+		// Check if the OTP is expired
+		if (System.currentTimeMillis() > expirationTime) {
+			otpMap.remove(username);
+			LOGGER.warning("OTP expired for reset password request: " + username);
+			return ResponseEntity.badRequest().body("OTP has expired. Please request an OTP again.");
+		}
 
-        LOGGER.info("Password reset successful for user: " + username);
-        return ResponseEntity.ok("Password reset successful.");
-    }
+		// Check if the provided OTP matches the stored OTP
+		if (!otp.equals(storedOtp)) {
+			LOGGER.warning("Invalid OTP for reset password request: " + username);
+			return ResponseEntity.badRequest().body("Invalid OTP.");
+		}
 
-    private String generateOTP() {
-        // Generate a random 6-digit OTP
-        Random random = new Random();
-        int otpNumber = 100000 + random.nextInt(900000);
-        return String.valueOf(otpNumber);
-    }
-    
-    @PostMapping("/register")
-    public Users create(@RequestBody Users user) {
-        Users newUser = service.createCustomer(user);
+		// Reset the password for the user
+		Users vendor = service.findUserByEmail(username);
+		vendor.setPassword(newPassword);
+		service.editVendor(vendor);
 
-        // Sending email
-        String senderEmail = "axisbank.confirmationmail@gmail.com";
-        String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual password
-        String recipientEmail = user.getEmail(); // Use the email from the newly registered user
-        String subject = "Registration Confirmation";
-        String messageBody = "Dear customer,\n\n"
-                            + "Thank you for registering with Axis Bank.\n\n"
-                            + "Your registration is successful.\n\n"
-                            + "Regards,\n"
-                            + "Axis Bank";
+		// Password reset successful, remove the OTP entry from the map
+		otpMap.remove(username);
 
-        Properties properties = System.getProperties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "465");
+		// Notify the user that the password has been reset
+		String recipientEmail = vendor.getEmail();
+		String subject = "Password Reset Successful";
+		String messageBody = "Your password has been successfully reset.";
 
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication(senderEmail, senderPassword);
-            }
-        });
+		sendEmail(recipientEmail, subject, messageBody);
 
-        session.setDebug(true);
+		LOGGER.info("Password reset successful for user: " + username);
+		return ResponseEntity.ok("Password reset successful.");
+	}
 
-        try {
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-            message.setSubject(subject);
-            message.setText(messageBody);
+	private String generateOTP() {
+		// Generate a random 6-digit OTP
+		Random random = new Random();
+		int otpNumber = 100000 + random.nextInt(900000);
+		return String.valueOf(otpNumber);
+	}
 
-            javax.mail.Transport.send(message);
+	@PostMapping("/register")
+	public Users create(@RequestBody Users user) {
+		Users newUser = service.createCustomer(user);
 
-            LOGGER.info("Registration email sent to: " + recipientEmail);
-        } catch (MessagingException e) {
-            // Handle the error if the confirmation email fails to send
-            LOGGER.warning("Error sending registration email to: " + recipientEmail);
-            e.printStackTrace();
-        }
+		// Sending email
+		String senderEmail = "axisbank.confirmationmail@gmail.com";
+		String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual password
+		String recipientEmail = user.getEmail(); // Use the email from the newly registered user
+		String subject = "Registration Confirmation";
+		String messageBody = "Dear customer,\n\n" + "Thank you for registering with Maratha Bank.\n\n"
+				+ "Your registration is successful.\n\n" + "Regards,\n" + "Maratha Bank";
 
-        LOGGER.info("Customer registered successfully: " + newUser.getUsername());
-        return newUser;
-    }
+		Properties properties = System.getProperties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "465");
 
-    @GetMapping("/profile")
-    public String profile(HttpServletRequest request) {
-        String username=request.getAttribute("username").toString();
-        Users user=service.viewProfile(username);
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication(senderEmail, senderPassword);
+			}
+		});
 
-        LOGGER.info("Profile viewed for user: " + username);
-        return user.toString();
-    }
+		session.setDebug(true);
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<Users> editUserDetails(@PathVariable int id, @RequestBody Users updatedUser) {
-        // Set the id from the path variable to the updatedUser
-        updatedUser.setId(id);
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(senderEmail));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+			message.setSubject(subject);
+			message.setText(messageBody);
 
-        Users user = service.editUser(updatedUser);
-        if (user != null) {
-            LOGGER.info("User details updated: " + user.getUsername());
-            return ResponseEntity.ok(user);
-        } else {
-            LOGGER.warning("User not found for edit: " + id);
-            return ResponseEntity.notFound().build();
-        }
-    }
+			javax.mail.Transport.send(message);
 
-    @GetMapping("/account-details")
-    public String accountDetails(HttpServletRequest request) {
-        String username=request.getAttribute("username").toString();
-        Users user=service.viewProfile(username);
-        Account account=service.findAccountByUserId(user.getId());
+			LOGGER.info("Registration email sent to: " + recipientEmail);
+		} catch (MessagingException e) {
+			// Handle the error if the confirmation email fails to send
+			LOGGER.warning("Error sending registration email to: " + recipientEmail);
+			e.printStackTrace();
+		}
 
-        LOGGER.info("Account details viewed for user: " + username);
-        return account.toString();
-    }
+		LOGGER.info("Customer registered successfully: " + newUser.getUsername());
+		return newUser;
+	}
 
-    private void sendEmail(String recipientEmail, String subject, String messageBody) {
-        String senderEmail = "axisbank.confirmationmail@gmail.com";
-        String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual sender email password
+	@GetMapping("/profile")
+	public String profile(HttpServletRequest request) {
+		String username = request.getAttribute("username").toString();
+		Users user = service.viewProfile(username);
 
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "465");
+		LOGGER.info("Profile viewed for user: " + username);
+		return user.toString();
+	}
 
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, senderPassword);
-            }
-        });
+	@PutMapping("/edit/{id}")
+	public ResponseEntity<Users> editUserDetails(@PathVariable int id, @RequestBody Users updatedUser) {
+		// Set the id from the path variable to the updatedUser
+		updatedUser.setId(id);
 
-        session.setDebug(true);
+		Users user = service.editUser(updatedUser);
+		if (user != null) {
+			LOGGER.info("User details updated: " + user.getUsername());
+			return ResponseEntity.ok(user);
+		} else {
+			LOGGER.warning("User not found for edit: " + id);
+			return ResponseEntity.notFound().build();
+		}
+	}
 
-        try {
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-            message.setSubject(subject);
-            message.setText(messageBody);
+	@GetMapping("/account-details")
+	public String accountDetails(HttpServletRequest request) {
+		String username = request.getAttribute("username").toString();
+		Users user = service.viewProfile(username);
+		Account account = service.findAccountByUserId(user.getId());
 
-            Transport.send(message);
+		LOGGER.info("Account details viewed for user: " + username);
+		return account.toString();
+	}
 
-            LOGGER.info("Email sent to: " + recipientEmail);
-        } catch (MessagingException e) {
-            LOGGER.warning("Error sending email: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+	private void sendEmail(String recipientEmail, String subject, String messageBody) {
+		String senderEmail = "axisbank.confirmationmail@gmail.com";
+		String senderPassword = "cxhqkconrmkjetrr"; // Replace with the actual sender email password
 
-    // Other methods...
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "465");
+
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderEmail, senderPassword);
+			}
+		});
+
+		session.setDebug(true);
+
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(senderEmail));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+			message.setSubject(subject);
+			message.setText(messageBody);
+
+			Transport.send(message);
+
+			LOGGER.info("Email sent to: " + recipientEmail);
+		} catch (MessagingException e) {
+			LOGGER.warning("Error sending email: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	// Other methods...
 
 }

@@ -55,7 +55,7 @@ public class EmployeeController {
 
 	    // Check if the locker exists
 	    if (locker == null) {
-	        return "Locker activation failed. Locker not found.";
+	        return "User not found. Please look into the database or contact your administator";
 	    }
 
 	    // Check if the locker is already active

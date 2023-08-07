@@ -104,6 +104,9 @@
 			<version>3.21.0</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+
 
 		
 						<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->

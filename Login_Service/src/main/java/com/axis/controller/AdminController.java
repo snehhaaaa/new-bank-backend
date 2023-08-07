@@ -45,7 +45,7 @@ public class AdminController {
     public String home(HttpServletRequest request) {
         String username = request.getAttribute("username").toString();
         LOGGER.info("Request received for home endpoint by user: {}", username);
-        return "Hello " + username + "(admin) welcome home.\nYou're logged in.";
+        return "Hello " + username + " welcome home.\nYou're logged in.";
     }
 
     @PostMapping("/authenticate")
