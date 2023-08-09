@@ -70,6 +70,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	}
 	
 	public void deposit(int userid,double totalBalance,double amount) {
+//		if (totalBalance < 1000){
+//			System.out.println("Sorry, amount has to be more than 1000 rupees");
+//			return;
+//		}
 		ar.updateAmount(userid, totalBalance);
 		Transaction t=new Transaction(generateTransactionId(), LocalDateTime.now(), amount, "Deposited From Bank/ATM", "CREDIT", ar.findAccountByUserId(userid));
 		ctr.save(t);

@@ -14,7 +14,7 @@ public interface CustomerTransactionRepository extends JpaRepository<Transaction
 
 	@Query("SELECT t FROM Transaction t WHERE t.account.accid = :accid")
 	public List<Transaction> getAllTransactionsByAccountId(int accid);
-	
+
 	public List<Transaction> findByDatetimeBetween(LocalDateTime startDate, LocalDateTime endDate);
-	
+
 }

@@ -15,23 +15,23 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.axis.service.CustomUserDetailsService;
+//import com.axis.service.CustomUserDetailsService;
 import com.axis.service.UserDetailsServiceImpl;
 import com.axis.util.JwtUtil;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
-	private final CustomUserDetailsService userDetailsService;
+//	private final CustomUserDetailsService userDetailsService;
 
 	@Autowired
 	private JwtUtil jwtUtil;
 	@Autowired
 	private UserDetailsServiceImpl service;
 	
-	@Autowired
-    public JwtFilter(CustomUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+//	@Autowired
+//    public JwtFilter(CustomUserDetailsService userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

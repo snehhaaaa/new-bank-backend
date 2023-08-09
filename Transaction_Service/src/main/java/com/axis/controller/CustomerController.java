@@ -130,6 +130,7 @@ public class CustomerController {
         Account account = service.findAccountByUserId(userid);
 
         if (account.getStatus().equals("PENDING")) {
+
             logger.info("Deposit failed for user: {}. Account status: PENDING", username);
             return "Sorry, your account is not active yet. You can't perform transactions.";
         }
@@ -137,6 +138,11 @@ public class CustomerController {
         if (amount < 0) {
             logger.info("Deposit failed for user: {}. Negative amount entered.", username);
             return "Sorry, you entered a negative amount. Please enter a positive amount.";
+        }
+
+        if (account.getBalance() < 11000) {
+            logger.info("Deposit failed for user: {}. Account balance is less than 11000.", username);
+            return "Sorry, you can only deposit if your account balance is at least 11000.";
         }
 
         double newBalance = account.getBalance() + amount;

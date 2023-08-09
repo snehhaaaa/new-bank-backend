@@ -61,8 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);
 	}
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return NoOpPasswordEncoder.getInstance();
+//	}
 }
