@@ -1,6 +1,9 @@
 package com.axis.controller;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.Authenticator;
@@ -320,30 +323,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/all-customers")
-    public List<Map<String, Object>> allCustomers() {
-        List<Users> customers = service.listAllCustomers();
-        List<Map<String, Object>> customersWithAccountNumbers = new ArrayList<>();
-
-        for (Users customer : customers) {
-            Map<String, Object> customerMap = new HashMap<>();
-            customerMap.put("id", customer.getId());
-            customerMap.put("username", customer.getUsername());
-            customerMap.put("email", customer.getEmail());
-            customerMap.put("address", customer.getAddress());
-            customerMap.put("phone", customer.getPhone());
-
-            // Fetch and include the account number of the customer
-            Account account = service.findAccountByUserId(customer.getId());
-            if (account != null) {
-                customerMap.put("accountNumber", account.getAccno());
-            } else {
-                customerMap.put("accountNumber", "N/A");
-            }
-
-            customersWithAccountNumbers.add(customerMap);
-        }
-
-        return customersWithAccountNumbers;
+    public List<Users> allCustomers() {
+        return service.listAllCustomers();
     }
 
     @DeleteMapping("/delete-customer")
